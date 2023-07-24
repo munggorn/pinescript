@@ -1,0 +1,27 @@
+//@version=4
+study("Average Volume", shorttitle="Avg Volume", overlay=false)
+
+length = input(20, title="Length")
+length2 = input(20, title="Length")
+threshold = input(0,title = "Threshold",minval=-2.5, maxval=2.5, step=0.1)
+avgVolume = sma(volume, length)
+sDev = stdev(volume, length)
+z = (volume - avgVolume)/sDev
+//z_ema = ema(z,length2)
+colorCondition = z > threshold ? (close > open ? color.green : color.red) : (z < threshold ? color.blue : na)
+
+plot(z, title="Average Volume",title="Histogram", style=plot.style_histogram, color=colorCondition, linewidth=2)
+
+
+//plot(z_ema, title="Average Volume", color=color.blue, linewidth=2)
+hline(0, "SD 0", color=color.white, linewidth=1, linestyle = hline.style_solid)
+hline(0.5, "SD 0.5", color=color.green, linewidth=1, linestyle = hline.style_dotted)
+hline(1, "SD 1", color=color.green, linewidth=1, linestyle = hline.style_dotted)
+hline(1.5, "SD 1.5", color=color.green, linewidth=1, linestyle = hline.style_dotted)
+hline(2, "SD 2", color=color.green, linewidth=1, linestyle = hline.style_dotted)
+hline(2.5, "SD 2.5", color=color.green, linewidth=2, linestyle = hline.style_dashed)
+hline(-0.5, "SD -0.5", color=color.red, linewidth=1, linestyle = hline.style_dotted)
+hline(-1, "SD -1", color=color.red, linewidth=1, linestyle = hline.style_dotted)
+hline(-1.5, "SD -1.5", color=color.red, linewidth=1, linestyle = hline.style_dotted)
+hline(-2, "SD -2", color=color.red, linewidth=1, linestyle = hline.style_dotted)
+hline(-2.5, "SD -2.5", color=color.red, linewidth=2, linestyle = hline.style_dashed)

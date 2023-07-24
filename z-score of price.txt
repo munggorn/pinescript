@@ -1,0 +1,31 @@
+//@version=3
+study(title="Z-Score", shorttitle="Z-Score")
+Period = input(50, minval=1)
+input1 = input(7)
+
+input3 = input(-4)
+input4 = input(-3)
+input5 = input(-2)
+input6 = input(0)
+input7 = input(2)
+input8 = input(3)
+input9 = input(4)
+
+hline(input3, color=lime,  linestyle=line)
+hline(input4, color=green, linestyle=line)
+hline(input5, color=olive,  linestyle=line)
+hline(input6, color=white, linestyle=line)
+hline(input7, color=orange,  linestyle=line)
+hline(input8, color=maroon, linestyle=line)
+hline(input9, color=red,  linestyle=line)
+
+xStdDev = stdev(close, Period)
+xMA = sma(close, Period)
+
+nRes = (close - xMA) / xStdDev
+ema1 = ema(nRes,input1)
+
+
+plot(nRes, color = white, title="Z-Score")
+plot(ema1, color = aqua)
+//plot(sma2, color = aqua)
