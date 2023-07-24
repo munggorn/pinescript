@@ -1,0 +1,16 @@
+//@version=5
+indicator("Non-Centered EMA", overlay = true)
+ema1 = input(5)
+ema2 = input(20)
+
+smooth = input(8)
+length_ema1 = ta.ema(close,ema1)
+length_ema2 = ta.ema(close,ema2)
+smooth_ema1 = ta.ema(length_ema1,smooth)
+
+plot(smooth_ema1,title = 'fast_ema')
+
+
+offset1 = input(3)
+lead = plot(smooth_ema1,offset=offset1,title = 'shifted_ema')
+plot(length_ema2,title='slow_ema')
